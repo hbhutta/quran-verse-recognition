@@ -48,21 +48,21 @@ if not os.path.isdir('data'):
 
 total_verses_acc = 0 # Should be 6223 in the end
 def create_data_dirs():
-    for n_chapter in range(1, 114 + 1):
+    for n_chapter in range(14, 114 + 1):
         print(f'In chapter {n_chapter}') # should be in [1,114]
-        if not os.path.isdir(f'data/{n_chapter}'):
-            os.mkdir(f'data/{n_chapter}')
-            for n_verse in range(chapter_range[str(n_chapter)][0], chapter_range[str(n_chapter)][1] + 1):
-                print(f'In verse {n_verse} in chapter {n_chapter}') # n_verse should be within chapter's range
-                print(total_verses_acc)
-                if not os.path.isdir(f'data/{n_chapter}/{n_verse}'):
-                    os.mkdir(f'data/{n_chapter}/{n_verse}')
-                    for reciter in bitrates_for_reciters.keys():
-                        cdn_link = f'https://cdn.islamic.network/quran/audio/{min(bitrates_for_reciters[reciter])}/{reciter}/{n_verse}.mp3'
-                        audio = requests.get(cdn_link)
-                        # reciter[3:] excludes ar. from the string "ar.reciter_name"
-                        with open(f'data/{n_chapter}/{n_verse}/{n_chapter}_{n_verse}_{reciter[3:]}.mp3', 'wb') as f:
-                            f.write(audio.content)
+        # if not os.path.isdir(f'data/{n_chapter}'):
+        # os.mkdir(f'data/{n_chapter}')
+        for n_verse in range(chapter_range[str(n_chapter)][0], chapter_range[str(n_chapter)][1] + 1):
+            print(f'In verse {n_verse} in chapter {n_chapter}') # n_verse should be within chapter's range
+            print(total_verses_acc)
+            if not os.path.isdir(f'data/{n_chapter}_{n_verse}'):
+                os.mkdir(f'data/{n_chapter}_{n_verse}')
+                for reciter in bitrates_for_reciters.keys():
+                    cdn_link = f'https://cdn.islamic.network/quran/audio/{min(bitrates_for_reciters[reciter])}/{reciter}/{n_verse}.mp3'
+                    audio = requests.get(cdn_link)
+                    # reciter[3:] excludes ar. from the string "ar.reciter_name"
+                    with open(f'data/{n_chapter}_{n_verse}/{n_chapter}_{n_verse}_{reciter[3:]}.mp3', 'wb') as f:
+                        f.write(audio.content)
 
 create_data_dirs()
 print(total_verses_acc) # Should be 6223
