@@ -16,4 +16,5 @@ Total of almost 200,000 .mp3 files (26 audio samples for each of the 6223 verses
 - Learned that audio classification can be considered image classification on audio spectrograms since any audio sample has a unique spectrogram
 - Reorganized directory structure
 - Choosing to use PyTorch instead of TensorFlow because the latter only supports .wav file formats for audio classification
+- **Finished data collection, almost 200k .mp3 files**
 
